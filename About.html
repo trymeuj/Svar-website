@@ -708,43 +708,65 @@
       border-bottom-left-radius: 2px;
     }
 
+ .team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.team-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.team-member {
+  margin: 0 30px;
+  text-align: center;
+}
+
+.team-photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.team-name {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
     .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 1200px;
-      margin: auto;
-      margin-top: 60px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-items: center;
     }
 
     .team-row {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      margin-bottom: 20px;
+        display: contents; /* Make sure the team rows are not affecting the grid */
     }
 
-
     .team-member {
-      /* display: flex; */
-      /* flex-direction: column;
-      align-items: center; */
-      margin: 0 30px;
-      text-align: center;
+        margin: 0;
     }
 
     .team-photo {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
+        width: 150px;
+        height: 150px;
     }
 
     .team-name {
-      margin-top: 10px;
+        font-size: 14px;
     }
+}
 
     .um-nav-drawer .um-drawer-buttons button {
       width: 100%;
@@ -1204,11 +1226,11 @@
   <section class="_58ce83d8">
     <div class="wr">
       <div class="_f4c879d8">
-        <nav class="_2306d92f um-nav-wrapper um-classic um-hidden" id="fo0gjxkpjr">
+        <nav class="_2306d92f um-nav-wrapper um-classic um-hidden" id="44f093dm2f">
           <div class="um-nav-children">
             <div class="_e527b3d4" style="--gap:1;font-size:16px"><a>
                 <div class="_2446a2ff" style="--scale:0.7"><img alt="Artboard 12 1.svg" class="_ce468ac9"
-                    src="./assets/svar.svg" /></div><span class="_9b621667"></span>
+                    src="./assets/logo.svg" /></div><span class="_9b621667"></span>
               </a></div>
           </div>
           <ul class="um-nav-links">
@@ -1219,8 +1241,8 @@
             <!-- <li><a href="">Blogs</a></li> -->
           </ul>
           <div class="um-nav-buttons"></div>
-        </nav><button class="um-nav-drawerTrigger" id="fo0gjxkpjr-drawerTrigger" title="Open Mobile Menu"></button>
-        <div class="_2306d92f um-nav-drawer um-hidden" id="fo0gjxkpjr-drawer">
+        </nav><button class="um-nav-drawerTrigger" id="44f093dm2f-drawerTrigger" title="Open Mobile Menu"></button>
+        <div class="_2306d92f um-nav-drawer um-hidden" id="44f093dm2f-drawer">
           <header><button class="um-nav-drawerClose"><svg fill="none" height="24" stroke="currentColor"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -1236,7 +1258,7 @@
           </div>
           <div class="um-drawer-buttons"></div>
         </div>
-        <script>!function () { const e = document.getElementById('fo0gjxkpjr'); if (!e) return; const t = document.getElementById('fo0gjxkpjr-drawerTrigger'), n = document.getElementById('fo0gjxkpjr-drawer'); document.addEventListener('click', (function (e) { n.contains(e.target) || e.target === t || n.classList.add('um-hidden') })); const d = n.querySelector('.um-nav-drawerClose'), s = n.querySelectorAll('.um-drawer-links > li > button'), i = e.querySelector('.um-nav-children'), r = e.querySelector('.um-nav-links'), c = e.querySelector('.um-nav-buttons'); t.addEventListener('click', (function () { n.classList.remove('um-hidden') })), d.addEventListener('click', (function () { n.classList.add('um-hidden') })), s.forEach((function (e) { e.addEventListener('click', (function () { this.parentNode.classList.toggle('um-open') })) })); let o = 0, u = !0; function a() { !1 === u && (o = (i?.offsetWidth || 0) + (r?.offsetWidth || 0) + (c?.offsetWidth || 0)), l() } function l() { e.offsetWidth - 10 < o ? (u = !0, e.classList.add('um-hidden'), t.classList.remove('um-hidden')) : (u = !1, e.classList.remove('um-hidden'), t.classList.add('um-hidden'), n.classList.add('um-hidden')) } new ResizeObserver(l).observe(document.body), i && new ResizeObserver(a).observe(i), c && new ResizeObserver(a).observe(c), r && new ResizeObserver(a).observe(r), a(), l() }();</script>
+        <script>!function () { const e = document.getElementById('44f093dm2f'); if (!e) return; const t = document.getElementById('44f093dm2f-drawerTrigger'), n = document.getElementById('44f093dm2f-drawer'); document.addEventListener('click', (function (e) { n.contains(e.target) || e.target === t || n.classList.add('um-hidden') })); const d = n.querySelector('.um-nav-drawerClose'), s = n.querySelectorAll('.um-drawer-links > li > button'), i = e.querySelector('.um-nav-children'), r = e.querySelector('.um-nav-links'), c = e.querySelector('.um-nav-buttons'); t.addEventListener('click', (function () { n.classList.remove('um-hidden') })), d.addEventListener('click', (function () { n.classList.add('um-hidden') })), s.forEach((function (e) { e.addEventListener('click', (function () { this.parentNode.classList.toggle('um-open') })) })); let o = 0, u = !0; function a() { !1 === u && (o = (i?.offsetWidth || 0) + (r?.offsetWidth || 0) + (c?.offsetWidth || 0)), l() } function l() { e.offsetWidth - 10 < o ? (u = !0, e.classList.add('um-hidden'), t.classList.remove('um-hidden')) : (u = !1, e.classList.remove('um-hidden'), t.classList.add('um-hidden'), n.classList.add('um-hidden')) } new ResizeObserver(l).observe(document.body), i && new ResizeObserver(a).observe(i), c && new ResizeObserver(a).observe(c), r && new ResizeObserver(a).observe(r), a(), l() }();</script>
       </div>
     </div>
   </section>
