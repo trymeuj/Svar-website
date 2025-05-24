@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Your Svar Account Data</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px; /* Adjust as needed */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        p {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .confirmation-group {
+            display: flex;
+            align-items: flex-start; /* Align checkbox with start of text */
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .confirmation-group input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 5px; /* Align checkbox better with first line of text */
+            accent-color: #e74c3c; /* Color for the checkbox itself */
+        }
+
+        .confirmation-group label {
+            font-size: 0.9em;
+            color: #e74c3c; /* Warning color */
+            font-weight: normal;
+        }
+
+        .delete-button {
+            background-color: #e74c3c; /* Red for destructive action */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .delete-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .message.success {
+            background-color: #e6fffa;
+            color: #00796b;
+            border: 1px solid #b2dfdb;
+        }
+        .message.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="assets/logo.svg" alt="Svar App Logo" class="logo">
+        <h1>Delete Your Svar Account</h1>
+        <p>
+            To permanently delete your Svar account and all associated data,
+            please enter your email and password.
+        </p>
+        <p style="font-weight: bold; color: #e74c3c;">
+            Warning: This action is irreversible. All your data within Svar will be permanently erased.
+        </p>
+
+        <form id="deleteDataForm">
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="confirmation-group">
+                <input type="checkbox" id="confirmDelete" name="confirmDelete" required>
+                <label for="confirmDelete">
+                    I understand that this action is final and all my data associated with my Svar account will be permanently deleted. I wish to proceed.
+                </label>
+            </div>
+
+            <button type="submit" class="delete-button" id="submitButton">Delete My Data</button>
+        </form>
+        <div id="responseMessage" class="message" style="display:none;"></div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById('deleteDataForm');
+        const submitButton = document.getElementById('submitButton');
+        const confirmCheckbox = document.getElementById('confirmDelete');
+        const responseMessageDiv = document.getElementById('responseMessage');
+
+        // Optional: Basic client-side enabling/disabling of submit button
+        // You might want to do this based on checkbox AND field input
+        function updateConfirmation() {
+            // submitButton.disabled = !confirmCheckbox.checked;
+            // A better check would be:
+            // submitButton.disabled = !(confirmCheckbox.checked && document.getElementById('email').value && document.getElementById('password').value);
+        }
+        // confirmCheckbox.addEventListener('change', updateConfirmation);
+        // document.getElementById('email').addEventListener('input', updateConfirmation);
+        // document.getElementById('password').addEventListener('input', updateConfirmation);
+        // updateConfirmation(); // Initial state
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Deleting...';
+            responseMessageDiv.style.display = 'none';
+            responseMessageDiv.className = 'message'; // Reset classes
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmed = confirmCheckbox.checked;
+
+            if (!confirmed) {
+                displayMessage('Please confirm that you understand the consequences.', 'error');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Delete My Data';
+                return;
+            }
+
+            // --- THIS IS WHERE YOU'D MAKE THE API CALL TO YOUR BACKEND ---
+            // Example:
+            // try {
+            //     const response = await fetch('/api/delete-user-data', { // Your actual backend endpoint
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({ email, password }),
+            //     });
+
+            //     const result = await response.json();
+
+            //     if (response.ok) {
+            //         displayMessage('Your account and data have been successfully deleted.', 'success');
+            //         form.reset(); // Clear the form
+            //         // Optionally redirect or disable form further
+            //         document.getElementById('email').disabled = true;
+            //         document.getElementById('password').disabled = true;
+            //         confirmCheckbox.disabled = true;
+            //     } else {
+            //         displayMessage(result.message || 'An error occurred. Please try again.', 'error');
+            //         submitButton.disabled = false;
+            //         submitButton.textContent = 'Delete My Data';
+            //     }
+            // } catch (error) {
+            //     console.error('Error:', error);
+            //     displayMessage('A network error occurred. Please check your connection and try again.', 'error');
+            //     submitButton.disabled = false;
+            //     submitButton.textContent = 'Delete My Data';
+            // }
+
+            // --- MOCKUP for demonstration without a real backend ---
+            console.log("Attempting to delete data for:", { email, password });
+            setTimeout(() => {
+                // Simulate a server response
+                // Replace this with actual fetch call logic
+                if (email === "test@example.com" && password === "password123") { // Mock success
+                    displayMessage('Your account and data have been successfully deleted (Mock).', 'success');
+                    form.reset();
+                    document.getElementById('email').disabled = true;
+                    document.getElementById('password').disabled = true;
+                    confirmCheckbox.disabled = true;
+                    submitButton.textContent = 'Data Deleted'; // Keep disabled
+                } else { // Mock failure
+                    displayMessage('Invalid credentials or user not found (Mock).', 'error');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Delete My Data';
+                }
+            }, 2000);
+            // --- END MOCKUP ---
+        });
+
+        function displayMessage(message, type) {
+            responseMessageDiv.textContent = message;
+            responseMessageDiv.classList.add(type); // 'success' or 'error'
+            responseMessageDiv.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
